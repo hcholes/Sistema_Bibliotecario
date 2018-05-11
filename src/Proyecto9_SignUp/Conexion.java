@@ -223,8 +223,8 @@ public class Conexion extends javax.swing.JFrame {
     }
     
     	public static final String URL="jdbc:mysql://127.0.0.1/biblioteca";
-	public static final String USERNAME="root";
-	public static final String PASSWORD="";
+	public static final String USERNAME="biblioteca";
+	public static final String PASSWORD="12345";
 	//private JTextField txt_nomusuario;
 	//private JTextField txt_clave;
 	

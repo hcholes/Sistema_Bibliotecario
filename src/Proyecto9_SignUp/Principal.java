@@ -24,6 +24,12 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 import rojerusan.RSPanelsSlider;
 
@@ -103,7 +109,7 @@ public class Principal extends javax.swing.JFrame {
             con = getConection();
             PreparedStatement ps;
             ResultSet res;
-            ps = con.prepareStatement("select * from librosycatalogos");
+            ps = con.prepareStatement("select * from librosycatalogos2");
             res = ps.executeQuery();
             int a = 0;
             while (res.next()) {
@@ -128,24 +134,24 @@ public class Principal extends javax.swing.JFrame {
     }
 
     public void mostrarautores() {
-        DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("Codigo");
-        modelo.addColumn("Nombre");
-        jTable3.setModel(modelo);
-        String[] Datos = new String[2];
+        DefaultTableModel modelo1 = new DefaultTableModel();
+        modelo1.addColumn("Codigo");
+        modelo1.addColumn("Nombre");
+        tabla_autores.setModel(modelo1);
+        String[] Datos1 = new String[2];
         // modelo.setColumnIdentifiers(new Object[]{"IDENTIFICACION", "NOMBRES", "APELLIDOS"});
         try {
             Connection con = null;
             con = getConection();
             PreparedStatement ps;
             ResultSet res;
-            ps = con.prepareStatement("select * from autores");
+            ps = con.prepareStatement("select * from autores2");
             res = ps.executeQuery();
             int a = 0;
             while (res.next()) {
-                Datos[0] = res.getString("cod_autor");
-                Datos[1] = res.getString("nom_autor");
-                modelo.addRow(Datos);
+                Datos1[0] = res.getString("cod_autor");
+                Datos1[1] = res.getString("nom_autor");
+                 modelo1.addRow(Datos1);
 
                 a = a + 1;
                 String texto1;
@@ -163,20 +169,22 @@ public class Principal extends javax.swing.JFrame {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Codigo");
         modelo.addColumn("Nombre");
-        tabla_autores.setModel(modelo);
-        String[] Datos = new String[2];
+        modelo.addColumn("Fecha Registro");
+        tabla_editorial.setModel(modelo);
+        String[] Datos = new String[3];
         // modelo.setColumnIdentifiers(new Object[]{"IDENTIFICACION", "NOMBRES", "APELLIDOS"});
         try {
             Connection con = null;
             con = getConection();
             PreparedStatement ps;
             ResultSet res;
-            ps = con.prepareStatement("select * from editorial");
+            ps = con.prepareStatement("select * from editorial2");
             res = ps.executeQuery();
             int a = 0;
             while (res.next()) {
                 Datos[0] = res.getString("Cod_editorial");
                 Datos[1] = res.getString("nom_editorial");
+                Datos[2] = res.getString("fecha_registro");
                 modelo.addRow(Datos);
 
                 a = a + 1;
@@ -325,6 +333,7 @@ public class Principal extends javax.swing.JFrame {
         lblFoto = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         cant_usuarios = new javax.swing.JLabel();
+        ReportarPDF = new javax.swing.JButton();
         pnl3 = new javax.swing.JPanel();
         jSeparator5 = new javax.swing.JSeparator();
         jLabel8 = new javax.swing.JLabel();
@@ -391,7 +400,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel42 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tabla_autores = new javax.swing.JTable();
         jLabel43 = new javax.swing.JLabel();
         cant_autores = new javax.swing.JLabel();
         editorial = new javax.swing.JPanel();
@@ -401,7 +410,7 @@ public class Principal extends javax.swing.JFrame {
         NOMBREEDITO = new javax.swing.JLabel();
         nomb_editorial = new javax.swing.JTextField();
         jScrollPane5 = new javax.swing.JScrollPane();
-        tabla_autores = new javax.swing.JTable();
+        tabla_editorial = new javax.swing.JTable();
         jLabel46 = new javax.swing.JLabel();
         cant_editorial = new javax.swing.JLabel();
         codi_editorial = new javax.swing.JTextField();
@@ -743,7 +752,7 @@ public class Principal extends javax.swing.JFrame {
                 GuardarActionPerformed(evt);
             }
         });
-        pnl2.add(Guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 550, 120, 40));
+        pnl2.add(Guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 550, 120, 40));
 
         jButton3.setText("jButton3");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -760,7 +769,7 @@ public class Principal extends javax.swing.JFrame {
                 EliminarActionPerformed(evt);
             }
         });
-        pnl2.add(Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 550, 120, 40));
+        pnl2.add(Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 550, 120, 40));
 
         Modificar.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 14)); // NOI18N
         Modificar.setText("Modificar");
@@ -769,7 +778,7 @@ public class Principal extends javax.swing.JFrame {
                 ModificarActionPerformed(evt);
             }
         });
-        pnl2.add(Modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 550, 130, 40));
+        pnl2.add(Modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 550, 130, 40));
 
         tipoUsuario.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tipoUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionne", "Estudiante", "Profesor", "Administrativo", "Particular" }));
@@ -793,7 +802,7 @@ public class Principal extends javax.swing.JFrame {
                 LimpiarActionPerformed(evt);
             }
         });
-        pnl2.add(Limpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 550, 120, 40));
+        pnl2.add(Limpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 550, 120, 40));
 
         sexo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         sexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionne", "M", "F" }));
@@ -834,6 +843,15 @@ public class Principal extends javax.swing.JFrame {
         cant_usuarios.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         cant_usuarios.setText("0");
         pnl2.add(cant_usuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 540, 70, -1));
+
+        ReportarPDF.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 14)); // NOI18N
+        ReportarPDF.setText("IMPRIMIR");
+        ReportarPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReportarPDFActionPerformed(evt);
+            }
+        });
+        pnl2.add(ReportarPDF, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 550, 160, 40));
 
         rSPanelsSlider1.add(pnl2, "card3");
 
@@ -1154,7 +1172,7 @@ public class Principal extends javax.swing.JFrame {
         jTextField1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         autores.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 130, 250, -1));
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tabla_autores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -1165,7 +1183,7 @@ public class Principal extends javax.swing.JFrame {
                 "Codigo", "Nombre Autor"
             }
         ));
-        jScrollPane4.setViewportView(jTable3);
+        jScrollPane4.setViewportView(tabla_autores);
 
         autores.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 720, 200));
 
@@ -1203,18 +1221,18 @@ public class Principal extends javax.swing.JFrame {
         nomb_editorial.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         editorial.add(nomb_editorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 150, 250, -1));
 
-        tabla_autores.setModel(new javax.swing.table.DefaultTableModel(
+        tabla_editorial.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Codigo", "Nombre Autor"
+                "Codigo", "Nombre Editorial", "Fecha Registro"
             }
         ));
-        jScrollPane5.setViewportView(tabla_autores);
+        jScrollPane5.setViewportView(tabla_editorial);
 
         editorial.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 710, 190));
 
@@ -1538,6 +1556,7 @@ public class Principal extends javax.swing.JFrame {
             ps.setString(11, sexo.getSelectedItem().toString());
             ps.setString(12, rutaImagen.getText());
             ps.setString(13, numId.getText());
+            System.err.println(ps.toString());
             int res = ps.executeUpdate();
             if (res > 0) {
                 mostrar();
@@ -1646,7 +1665,7 @@ public class Principal extends javax.swing.JFrame {
             con = getConection();
             PreparedStatement ps;
             ResultSet res;
-            ps = con.prepareStatement("select * from librosycatalogos where codigo = ?");
+            ps = con.prepareStatement("select * from librosycatalogos2 where codigo = ?");
             ps.setString(1, codigolibro.getText());
 
             res = ps.executeQuery();
@@ -1660,7 +1679,7 @@ public class Principal extends javax.swing.JFrame {
                 ano1.setSelectedItem(res.getString("año"));
                 tomo.setSelectedItem(res.getString("tomo"));
                 observacion.setText(res.getString("observacion"));
-                fecha_registro1.setText(res.getString("fecha_registro"));
+                fecha_registro1.setText(res.getString("fecha"));
                 rutaImagen1.setText(res.getString("rutaimagen"));
 
                 Image foto = getToolkit().getImage(res.getString("rutaimagen"));
@@ -1705,7 +1724,7 @@ public class Principal extends javax.swing.JFrame {
             Connection con = null;
             con = getConection();
             PreparedStatement ps;
-            ps = con.prepareStatement("Update librosycatalogos set nombre=?, area=?, cod_autor=?, cod_editorial=?, año=?, tomo=?, fecha_registro=?, observacion=?, rutaimagen=? where codigo=?");
+            ps = con.prepareStatement("Update librosycatalogos2 set nombre=?, area=?, cod_autor=?, cod_editorial=?, año=?, tomo=?, fecha=?, observacion=?, rutaimagen=? where codigo=?");
             ps.setString(1, nombre_libro.getText());
             ps.setString(2, area.getText());
             ps.setString(3, codAutor.getText());
@@ -1748,7 +1767,7 @@ public class Principal extends javax.swing.JFrame {
             } else {
 
                 PreparedStatement ps;
-                ps = con.prepareStatement("delete from librosycatalogos where codigo = ?");
+                ps = con.prepareStatement("delete from librosycatalogos2 where codigo = ?");
                 ps.setString(1, codigolibro.getText());
 
                 int res = ps.executeUpdate();
@@ -1775,7 +1794,7 @@ public class Principal extends javax.swing.JFrame {
             con = getConection();
             PreparedStatement ps;
             // FileInputStream archivofoto;
-            ps = con.prepareStatement("INSERT INTO librosycatalogos(codigo, nombre, area, cod_autor, cod_editorial, año, tomo, fecha_registro, observacion, rutaimagen) VALUES (?,?,?,?,?,?,?,?,?,?) ");
+            ps = con.prepareStatement("INSERT INTO librosycatalogos2(codigo, nombre, area, cod_autor, cod_editorial, año, tomo, fecha, observacion, rutaimagen) VALUES (?,?,?,?,?,?,?,?,?,?) ");
             ps.setString(1, codigolibro.getText());
             ps.setString(2, nombre_libro.getText());
             ps.setString(3, area.getText());
@@ -1792,7 +1811,7 @@ public class Principal extends javax.swing.JFrame {
             } else {
                 ps.setString(10, rutaImagen1.getText());
             }
-
+System.out.println(ps.toString());
             int res = ps.executeUpdate();
             if (res > 0) {
                 mostrarlibros();
@@ -1824,18 +1843,18 @@ public class Principal extends javax.swing.JFrame {
     private void Regresar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Regresar4ActionPerformed
         rSPanelsSlider1.setPanelSlider(20, pnl3, RSPanelsSlider.DIRECT.RIGHT);
 
-        DefaultTableModel tm = (DefaultTableModel) jTable3.getModel();
+        DefaultTableModel tm = (DefaultTableModel) tabla_autores.getModel();
 
-        String dato = String.valueOf(tm.getValueAt(jTable3.getSelectedRow(), 0));
+        String dato = String.valueOf(tm.getValueAt(tabla_autores.getSelectedRow(), 0));
         codAutor.setText(dato);
 
     }//GEN-LAST:event_Regresar4ActionPerformed
 
     private void Regresar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Regresar5ActionPerformed
         rSPanelsSlider1.setPanelSlider(20, pnl3, RSPanelsSlider.DIRECT.RIGHT);
-        DefaultTableModel tm = (DefaultTableModel) tabla_autores.getModel();
+        DefaultTableModel tm = (DefaultTableModel) tabla_editorial.getModel();
 
-        String dato = String.valueOf(tm.getValueAt(tabla_autores.getSelectedRow(), 0));
+        String dato = String.valueOf(tm.getValueAt(tabla_editorial.getSelectedRow(), 0));
         cod_editorial.setText(dato);
 
     }//GEN-LAST:event_Regresar5ActionPerformed
@@ -1870,7 +1889,7 @@ public class Principal extends javax.swing.JFrame {
             con = getConection();
             PreparedStatement ps;
             // FileInputStream archivofoto;
-            ps = con.prepareStatement("INSERT INTO editorial(Cod_editorial, nom_editorial, fecha_registro) VALUES (?,?,?) ");
+            ps = con.prepareStatement("INSERT INTO editorial2(Cod_editorial, nom_editorial, fecha_registro) VALUES (?,?,?) ");
             
             ps.setString(1, codi_editorial.getText());
             ps.setString(2, nomb_editorial.getText());
@@ -1886,11 +1905,32 @@ public class Principal extends javax.swing.JFrame {
 
             limpiareditorial();
             }
-        } catch (Exception e) {
+        } catch (HeadlessException | SQLException e) {
             JOptionPane.showMessageDialog(null, "Error en el proceso");
         }
 
     }//GEN-LAST:event_Guardar2ActionPerformed
+
+    private void ReportarPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReportarPDFActionPerformed
+       
+        try{
+        Connection con=getConection();
+        JasperReport reporte=null;
+        String path="src\\Reportes\\Usuarios.jasper";
+        reporte=(JasperReport) JRLoader.loadObjectFromFile(path);
+        JasperPrint jprint= JasperFillManager.fillReport(reporte, null, con);
+        
+        JasperViewer vista=new JasperViewer(jprint, false);
+        
+        vista.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        vista.setVisible(true);
+        }catch(JRException e){
+            
+            JOptionPane.showMessageDialog(null, e);
+        }        
+        
+        
+    }//GEN-LAST:event_ReportarPDFActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1956,6 +1996,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton Regresar3;
     private javax.swing.JButton Regresar4;
     private javax.swing.JButton Regresar5;
+    private javax.swing.JButton ReportarPDF;
     private javax.swing.JComboBox<String> ano;
     private javax.swing.JComboBox<String> ano1;
     private javax.swing.JTextField apellidos;
@@ -2058,7 +2099,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator9;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblFoto;
     private javax.swing.JLabel lblFoto1;
@@ -2083,6 +2123,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel sexo1;
     private javax.swing.JPanel sidepane;
     private javax.swing.JTable tabla_autores;
+    private javax.swing.JTable tabla_editorial;
     private javax.swing.JTextField telefono;
     private javax.swing.JComboBox<String> tipoId;
     private javax.swing.JComboBox<String> tipoUsuario;
