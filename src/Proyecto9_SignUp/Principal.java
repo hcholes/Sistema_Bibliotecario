@@ -11,14 +11,13 @@ import java.awt.Color;
 import java.awt.HeadlessException;
 import java.awt.Image;
 import java.io.File;
-import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -87,7 +86,7 @@ public class Principal extends javax.swing.JFrame {
                 cant_usuarios.setText(texto1);
             }
             con.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
         limpiarcasillas();
@@ -218,7 +217,7 @@ public class Principal extends javax.swing.JFrame {
         celular.setText(null);
         email.setText(null);
         fecha_registro.setText(getFechaActual());
-        String ruta = "D:\\eclipse-workspace\\Proyecto9_SignUp\\src\\imagenes\\estudiante.png";
+        String ruta = "D:\\eclipse-workspace\\Sistema_Bibliotecario\\src\\imagenes\\estudiante.png";
         rutaImagen.setText(null);
         Image foto = getToolkit().getImage(ruta);
         foto = foto.getScaledInstance(180, 180, Image.SCALE_DEFAULT);
@@ -245,7 +244,7 @@ public class Principal extends javax.swing.JFrame {
         tomo.setSelectedIndex(0);
         observacion.setText(null);
         fecha_registro1.setText(getFechaActual());
-        String ruta1 = "D:\\eclipse-workspace\\Proyecto9_SignUp\\src\\imagenes\\libro.png";
+        String ruta1 = "D:\\eclipse-workspace\\Sistema_Bibliotecario\\src\\imagenes\\libro.png";
         rutaImagen1.setText(null);
         Image foto = getToolkit().getImage(ruta1);
         foto = foto.getScaledInstance(180, 180, Image.SCALE_DEFAULT);
@@ -286,14 +285,14 @@ public class Principal extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         rSPanelsSlider1 = new rojerusan.RSPanelsSlider();
-        pnl1 = new javax.swing.JPanel();
+        form_inicio = new javax.swing.JPanel();
         jSeparator4 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
         jBReporte = new javax.swing.JButton();
         jBPrestamo = new javax.swing.JButton();
         jBEstadistica = new javax.swing.JButton();
         jBPrestamo1 = new javax.swing.JButton();
-        pnl2 = new javax.swing.JPanel();
+        form_registro = new javax.swing.JPanel();
         jSeparator3 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -334,7 +333,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel29 = new javax.swing.JLabel();
         cant_usuarios = new javax.swing.JLabel();
         ReportarPDF = new javax.swing.JButton();
-        pnl3 = new javax.swing.JPanel();
+        form_librosycatalogos = new javax.swing.JPanel();
         jSeparator5 = new javax.swing.JSeparator();
         jLabel8 = new javax.swing.JLabel();
         lblFoto1 = new javax.swing.JLabel();
@@ -371,29 +370,48 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         observacion = new javax.swing.JTextArea();
         jLabel40 = new javax.swing.JLabel();
-        pnl4 = new javax.swing.JPanel();
+        form_dispositivos = new javax.swing.JPanel();
         jSeparator6 = new javax.swing.JSeparator();
         jLabel9 = new javax.swing.JLabel();
-        pnl5 = new javax.swing.JPanel();
+        form_configuracion = new javax.swing.JPanel();
         jSeparator7 = new javax.swing.JSeparator();
         jLabel10 = new javax.swing.JLabel();
-        pnl6 = new javax.swing.JPanel();
+        form_prestamos = new javax.swing.JPanel();
         jSeparator8 = new javax.swing.JSeparator();
         jLabel24 = new javax.swing.JLabel();
         Regresar1 = new javax.swing.JButton();
-        pnl7 = new javax.swing.JPanel();
+        codigolibro_prestamo = new javax.swing.JTextField();
+        jLabel41 = new javax.swing.JLabel();
+        jButton8 = new javax.swing.JButton();
+        jLabel45 = new javax.swing.JLabel();
+        jLabel47 = new javax.swing.JLabel();
+        tipoId1_prestamo = new javax.swing.JComboBox<>();
+        numId1_prestamo = new javax.swing.JTextField();
+        jButton9 = new javax.swing.JButton();
+        resultadolibro = new javax.swing.JLabel();
+        resultadolibro1 = new javax.swing.JLabel();
+        resultadolibro2 = new javax.swing.JLabel();
+        resultadolibro3 = new javax.swing.JLabel();
+        resultadolibro4 = new javax.swing.JLabel();
+        resultadolibro5 = new javax.swing.JLabel();
+        resultadolibro6 = new javax.swing.JLabel();
+        resultadolibro7 = new javax.swing.JLabel();
+        jLabel48 = new javax.swing.JLabel();
+        fecha_prestamo = new javax.swing.JTextField();
+        Guardar3 = new javax.swing.JButton();
+        form_estadisticas = new javax.swing.JPanel();
         jSeparator9 = new javax.swing.JSeparator();
         jLabel25 = new javax.swing.JLabel();
         Regrear3 = new javax.swing.JButton();
-        pnl8 = new javax.swing.JPanel();
+        form_reportes = new javax.swing.JPanel();
         jSeparator10 = new javax.swing.JSeparator();
         jLabel26 = new javax.swing.JLabel();
         Regresar2 = new javax.swing.JButton();
-        pnl9 = new javax.swing.JPanel();
+        form_devolucion = new javax.swing.JPanel();
         jSeparator11 = new javax.swing.JSeparator();
         jLabel28 = new javax.swing.JLabel();
         Regresar3 = new javax.swing.JButton();
-        autores = new javax.swing.JPanel();
+        form_autores = new javax.swing.JPanel();
         jSeparator12 = new javax.swing.JSeparator();
         titulo_listaautores = new javax.swing.JLabel();
         Regresar4 = new javax.swing.JButton();
@@ -603,14 +621,14 @@ public class Principal extends javax.swing.JFrame {
 
         rSPanelsSlider1.setBackground(new java.awt.Color(255, 255, 255));
 
-        pnl1.setBackground(new java.awt.Color(255, 255, 255));
-        pnl1.setName("pnl1"); // NOI18N
-        pnl1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        pnl1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, 630, 30));
+        form_inicio.setBackground(new java.awt.Color(255, 255, 255));
+        form_inicio.setName("form_inicio"); // NOI18N
+        form_inicio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        form_inicio.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, 630, 30));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/titulos de menus.png"))); // NOI18N
-        pnl1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(552, 45, 250, 60));
+        form_inicio.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(552, 45, 250, 60));
 
         jBReporte.setBackground(new java.awt.Color(255, 255, 255));
         jBReporte.setForeground(new java.awt.Color(255, 255, 255));
@@ -623,7 +641,7 @@ public class Principal extends javax.swing.JFrame {
                 jBReporteActionPerformed(evt);
             }
         });
-        pnl1.add(jBReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 350, -1, -1));
+        form_inicio.add(jBReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 350, -1, -1));
 
         jBPrestamo.setBackground(new java.awt.Color(255, 255, 255));
         jBPrestamo.setForeground(new java.awt.Color(255, 255, 255));
@@ -636,7 +654,7 @@ public class Principal extends javax.swing.JFrame {
                 jBPrestamoActionPerformed(evt);
             }
         });
-        pnl1.add(jBPrestamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 160, -1, -1));
+        form_inicio.add(jBPrestamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 160, -1, -1));
 
         jBEstadistica.setBackground(new java.awt.Color(255, 255, 255));
         jBEstadistica.setForeground(new java.awt.Color(255, 255, 255));
@@ -649,7 +667,7 @@ public class Principal extends javax.swing.JFrame {
                 jBEstadisticaActionPerformed(evt);
             }
         });
-        pnl1.add(jBEstadistica, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 360, -1, -1));
+        form_inicio.add(jBEstadistica, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 360, -1, -1));
 
         jBPrestamo1.setBackground(new java.awt.Color(255, 255, 255));
         jBPrestamo1.setForeground(new java.awt.Color(255, 255, 255));
@@ -662,72 +680,72 @@ public class Principal extends javax.swing.JFrame {
                 jBPrestamo1ActionPerformed(evt);
             }
         });
-        pnl1.add(jBPrestamo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 160, -1, -1));
+        form_inicio.add(jBPrestamo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 160, -1, -1));
 
-        rSPanelsSlider1.add(pnl1, "card2");
+        rSPanelsSlider1.add(form_inicio, "card2");
 
-        pnl2.setBackground(new java.awt.Color(255, 255, 255));
-        pnl2.setName("pnl2"); // NOI18N
-        pnl2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        pnl2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 630, -1));
+        form_registro.setBackground(new java.awt.Color(255, 255, 255));
+        form_registro.setName("form_registro"); // NOI18N
+        form_registro.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        form_registro.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 630, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/registro1.png"))); // NOI18N
-        pnl2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(442, -4, 340, 50));
+        form_registro.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(442, -4, 340, 50));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel13.setText("Tipo de Documento:");
-        pnl2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 60, -1, -1));
+        form_registro.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 60, -1, -1));
 
         tipoId.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tipoId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "TI", "CC", "CE", "" }));
-        pnl2.add(tipoId, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 60, 100, -1));
+        form_registro.add(tipoId, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 60, 100, -1));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel14.setText("Numero de Documento:");
-        pnl2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 83, -1, -1));
-        pnl2.add(numId, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 83, 144, -1));
+        form_registro.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 83, -1, -1));
+        form_registro.add(numId, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 83, 144, -1));
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel15.setText("Nombres:");
-        pnl2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 106, -1, -1));
-        pnl2.add(nombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 106, 144, -1));
+        form_registro.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 106, -1, -1));
+        form_registro.add(nombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 106, 144, -1));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel16.setText("Apellidos:");
-        pnl2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 130, -1, -1));
-        pnl2.add(apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 130, 144, -1));
+        form_registro.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 130, -1, -1));
+        form_registro.add(apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 130, 144, -1));
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel17.setText("Tipo Usuario:");
-        pnl2.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 156, -1, -1));
+        form_registro.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 156, -1, -1));
 
         grado.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         grado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionne", "1A", "1B", "1C", "2A", "2B", "2C", "3A", "3B", "3C", "4A", "4B", "4C", "5A", "5B", "5C", "6A", "6B", "6C", "7A", "7B", "7C", "8A", "8B", "8C", "9A", "9B", "9C", "10A", "10B", "10C", "11A", "11B", "11C" }));
-        pnl2.add(grado, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 178, 110, -1));
+        form_registro.add(grado, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 178, 110, -1));
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel18.setText("Año:");
-        pnl2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(486, 206, 30, -1));
+        form_registro.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(486, 206, 30, -1));
 
         ano.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         ano.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "2018", "2019", "2020" }));
-        pnl2.add(ano, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 203, 110, -1));
-        pnl2.add(telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 230, 144, -1));
+        form_registro.add(ano, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 203, 110, -1));
+        form_registro.add(telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 230, 144, -1));
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel19.setText("Telefono:");
-        pnl2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 230, 60, -1));
-        pnl2.add(celular, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 254, 144, -1));
+        form_registro.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 230, 60, -1));
+        form_registro.add(celular, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 254, 144, -1));
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel20.setText("Celular:");
-        pnl2.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 255, -1, -1));
-        pnl2.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 280, 260, -1));
+        form_registro.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 255, -1, -1));
+        form_registro.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 280, 260, -1));
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel21.setText("Ruta:");
-        pnl2.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 320, -1, -1));
+        form_registro.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 320, -1, -1));
 
         jTable1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -743,7 +761,7 @@ public class Principal extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        pnl2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 780, 170));
+        form_registro.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 780, 170));
 
         Guardar.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 14)); // NOI18N
         Guardar.setText("Guardar");
@@ -752,7 +770,7 @@ public class Principal extends javax.swing.JFrame {
                 GuardarActionPerformed(evt);
             }
         });
-        pnl2.add(Guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 550, 120, 40));
+        form_registro.add(Guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 550, 120, 40));
 
         jButton3.setText("jButton3");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -760,7 +778,7 @@ public class Principal extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        pnl2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 80, 30, -1));
+        form_registro.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 80, 30, -1));
 
         Eliminar.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 14)); // NOI18N
         Eliminar.setText("Eliminar");
@@ -769,7 +787,7 @@ public class Principal extends javax.swing.JFrame {
                 EliminarActionPerformed(evt);
             }
         });
-        pnl2.add(Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 550, 120, 40));
+        form_registro.add(Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 550, 120, 40));
 
         Modificar.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 14)); // NOI18N
         Modificar.setText("Modificar");
@@ -778,22 +796,22 @@ public class Principal extends javax.swing.JFrame {
                 ModificarActionPerformed(evt);
             }
         });
-        pnl2.add(Modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 550, 130, 40));
+        form_registro.add(Modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 550, 130, 40));
 
         tipoUsuario.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tipoUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionne", "Estudiante", "Profesor", "Administrativo", "Particular" }));
-        pnl2.add(tipoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 153, 140, -1));
+        form_registro.add(tipoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 153, 140, -1));
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel22.setText("Grado:");
-        pnl2.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(475, 180, 40, -1));
+        form_registro.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(475, 180, 40, -1));
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel23.setText("Email:");
-        pnl2.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 280, -1, -1));
+        form_registro.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 280, -1, -1));
 
         fecha_registro.setEnabled(false);
-        pnl2.add(fecha_registro, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 306, 140, -1));
+        form_registro.add(fecha_registro, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 306, 140, -1));
 
         Limpiar.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 14)); // NOI18N
         Limpiar.setText("Limpiar");
@@ -802,15 +820,15 @@ public class Principal extends javax.swing.JFrame {
                 LimpiarActionPerformed(evt);
             }
         });
-        pnl2.add(Limpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 550, 120, 40));
+        form_registro.add(Limpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 550, 120, 40));
 
         sexo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         sexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionne", "M", "F" }));
-        pnl2.add(sexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 178, -1, -1));
+        form_registro.add(sexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 178, -1, -1));
 
         sexo1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         sexo1.setText("Sexo:");
-        pnl2.add(sexo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 180, 40, -1));
+        form_registro.add(sexo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 180, 40, -1));
 
         jButton2.setText("Seleccione");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -818,15 +836,15 @@ public class Principal extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        pnl2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 335, -1, 20));
+        form_registro.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 335, -1, 20));
 
         rutaImagen.setEditable(false);
         rutaImagen.setText("D:\\eclipse-workspace\\Proyecto9_SignUp\\src\\imagenes");
-        pnl2.add(rutaImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 335, 560, -1));
+        form_registro.add(rutaImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 335, 560, -1));
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel27.setText("Fecha Registro:");
-        pnl2.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 308, -1, -1));
+        form_registro.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 308, -1, -1));
 
         lblFoto.setBackground(new java.awt.Color(204, 204, 204));
         lblFoto.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
@@ -835,34 +853,34 @@ public class Principal extends javax.swing.JFrame {
         lblFoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/estudiante.png"))); // NOI18N
         lblFoto.setToolTipText("");
         lblFoto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnl2.add(lblFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 300, 240));
+        form_registro.add(lblFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 300, 240));
 
         jLabel29.setText("Cantidad");
-        pnl2.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 540, 50, -1));
+        form_registro.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 540, 50, -1));
 
         cant_usuarios.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         cant_usuarios.setText("0");
-        pnl2.add(cant_usuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 540, 70, -1));
+        form_registro.add(cant_usuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 540, 70, -1));
 
         ReportarPDF.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 14)); // NOI18N
-        ReportarPDF.setText("IMPRIMIR");
+        ReportarPDF.setText("Imprimir");
         ReportarPDF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ReportarPDFActionPerformed(evt);
             }
         });
-        pnl2.add(ReportarPDF, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 550, 160, 40));
+        form_registro.add(ReportarPDF, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 550, 160, 40));
 
-        rSPanelsSlider1.add(pnl2, "card3");
+        rSPanelsSlider1.add(form_registro, "card3");
 
-        pnl3.setBackground(new java.awt.Color(255, 255, 255));
-        pnl3.setName("pnl3"); // NOI18N
-        pnl3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        pnl3.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 630, 19));
+        form_librosycatalogos.setBackground(new java.awt.Color(255, 255, 255));
+        form_librosycatalogos.setName("form_librosycatalogos"); // NOI18N
+        form_librosycatalogos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        form_librosycatalogos.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 630, 19));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/libros1.png"))); // NOI18N
-        pnl3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, -1, 58));
+        form_librosycatalogos.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, -1, 58));
 
         lblFoto1.setBackground(new java.awt.Color(204, 204, 204));
         lblFoto1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
@@ -871,17 +889,17 @@ public class Principal extends javax.swing.JFrame {
         lblFoto1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/libro.png"))); // NOI18N
         lblFoto1.setToolTipText("");
         lblFoto1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnl3.add(lblFoto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 320, 290));
-        pnl3.add(codigolibro, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 83, 144, -1));
-        pnl3.add(nombre_libro, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 106, 144, -1));
+        form_librosycatalogos.add(lblFoto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 320, 290));
+        form_librosycatalogos.add(codigolibro, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 83, 144, -1));
+        form_librosycatalogos.add(nombre_libro, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 106, 144, -1));
 
         jLabel30.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel30.setText("Codigo:");
-        pnl3.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 85, -1, -1));
+        form_librosycatalogos.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 85, -1, -1));
 
         jLabel31.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel31.setText("Nombre Libro o Catalogo:");
-        pnl3.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 108, -1, -1));
+        form_librosycatalogos.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 108, -1, -1));
 
         jButton4.setText("...");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -889,27 +907,27 @@ public class Principal extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        pnl3.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 80, 30, -1));
+        form_librosycatalogos.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 80, 30, -1));
 
         jLabel32.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel32.setText("Area:");
-        pnl3.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 130, -1, -1));
-        pnl3.add(area, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 130, 144, -1));
+        form_librosycatalogos.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 130, -1, -1));
+        form_librosycatalogos.add(area, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 130, 144, -1));
 
         jLabel33.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel33.setText("Año:");
-        pnl3.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 220, 30, -1));
+        form_librosycatalogos.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 220, 30, -1));
 
         ano1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         ano1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "2018", "2019", "2020" }));
-        pnl3.add(ano1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 220, 110, -1));
+        form_librosycatalogos.add(ano1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 220, 110, -1));
 
         jLabel34.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel34.setText("Ruta:");
-        pnl3.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, -1, -1));
+        form_librosycatalogos.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, -1, -1));
 
         fecha_registro1.setEnabled(false);
-        pnl3.add(fecha_registro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 352, 140, -1));
+        form_librosycatalogos.add(fecha_registro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 352, 140, -1));
 
         jTable2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -925,10 +943,10 @@ public class Principal extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTable2);
 
-        pnl3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 780, 130));
+        form_librosycatalogos.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 780, 130));
 
         rutaImagen1.setEditable(false);
-        pnl3.add(rutaImagen1, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 375, 560, -1));
+        form_librosycatalogos.add(rutaImagen1, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 375, 560, -1));
 
         jButton5.setText("Seleccione");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -936,14 +954,14 @@ public class Principal extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        pnl3.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 375, -1, 20));
+        form_librosycatalogos.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 375, -1, 20));
 
         cant_libros.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         cant_libros.setText("0");
-        pnl3.add(cant_libros, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 540, 70, -1));
+        form_librosycatalogos.add(cant_libros, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 540, 70, -1));
 
         jLabel35.setText("Cantidad");
-        pnl3.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 540, 50, -1));
+        form_librosycatalogos.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 540, 50, -1));
 
         Limpiar1.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 14)); // NOI18N
         Limpiar1.setText("Limpiar");
@@ -952,7 +970,7 @@ public class Principal extends javax.swing.JFrame {
                 Limpiar1ActionPerformed(evt);
             }
         });
-        pnl3.add(Limpiar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 550, 120, 40));
+        form_librosycatalogos.add(Limpiar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 550, 120, 40));
 
         Modificar1.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 14)); // NOI18N
         Modificar1.setText("Modificar");
@@ -961,7 +979,7 @@ public class Principal extends javax.swing.JFrame {
                 Modificar1ActionPerformed(evt);
             }
         });
-        pnl3.add(Modificar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 550, 130, 40));
+        form_librosycatalogos.add(Modificar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 550, 130, 40));
 
         Eliminar1.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 14)); // NOI18N
         Eliminar1.setText("Eliminar");
@@ -970,7 +988,7 @@ public class Principal extends javax.swing.JFrame {
                 Eliminar1ActionPerformed(evt);
             }
         });
-        pnl3.add(Eliminar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 550, 120, 40));
+        form_librosycatalogos.add(Eliminar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 550, 120, 40));
 
         Guardar1.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 14)); // NOI18N
         Guardar1.setText("Guardar");
@@ -979,12 +997,12 @@ public class Principal extends javax.swing.JFrame {
                 Guardar1ActionPerformed(evt);
             }
         });
-        pnl3.add(Guardar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 550, 120, 40));
+        form_librosycatalogos.add(Guardar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 550, 120, 40));
 
         jLabel36.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel36.setText("Codigo Autor:");
-        pnl3.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 160, -1, -1));
-        pnl3.add(codAutor, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 160, 144, -1));
+        form_librosycatalogos.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 160, -1, -1));
+        form_librosycatalogos.add(codAutor, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 160, 144, -1));
 
         jButton6.setText("...");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -992,12 +1010,12 @@ public class Principal extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        pnl3.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 160, 30, -1));
+        form_librosycatalogos.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 160, 30, -1));
 
         jLabel37.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel37.setText("Codigo Editorial:");
-        pnl3.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, -1, -1));
-        pnl3.add(cod_editorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 190, 144, -1));
+        form_librosycatalogos.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, -1, -1));
+        form_librosycatalogos.add(cod_editorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 190, 144, -1));
 
         jButton7.setText("...");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -1005,99 +1023,178 @@ public class Principal extends javax.swing.JFrame {
                 jButton7ActionPerformed(evt);
             }
         });
-        pnl3.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 190, 30, -1));
+        form_librosycatalogos.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 190, 30, -1));
 
         jLabel38.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel38.setText("Tomo:");
-        pnl3.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 250, -1, -1));
+        form_librosycatalogos.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 250, -1, -1));
 
         tomo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tomo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X" }));
-        pnl3.add(tomo, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 250, 110, -1));
+        form_librosycatalogos.add(tomo, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 250, 110, -1));
 
         jLabel39.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel39.setText("Fecha Registro:");
-        pnl3.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 353, -1, -1));
+        form_librosycatalogos.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 353, -1, -1));
 
         observacion.setColumns(20);
         observacion.setRows(5);
         jScrollPane3.setViewportView(observacion);
 
-        pnl3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 280, 280, 70));
+        form_librosycatalogos.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 280, 280, 70));
 
         jLabel40.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel40.setText("Observacion:");
-        pnl3.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 300, -1, -1));
+        form_librosycatalogos.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 300, -1, -1));
 
-        rSPanelsSlider1.add(pnl3, "card4");
+        rSPanelsSlider1.add(form_librosycatalogos, "card4");
 
-        pnl4.setBackground(new java.awt.Color(255, 255, 255));
-        pnl4.setName("pnl4"); // NOI18N
+        form_dispositivos.setBackground(new java.awt.Color(255, 255, 255));
+        form_dispositivos.setName("form_dispositivos"); // NOI18N
+        form_dispositivos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        form_dispositivos.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 111, 630, 19));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/dispo1.png"))); // NOI18N
+        form_dispositivos.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(396, 43, -1, 62));
 
-        javax.swing.GroupLayout pnl4Layout = new javax.swing.GroupLayout(pnl4);
-        pnl4.setLayout(pnl4Layout);
-        pnl4Layout.setHorizontalGroup(
-            pnl4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl4Layout.createSequentialGroup()
-                .addContainerGap(172, Short.MAX_VALUE)
-                .addGroup(pnl4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addGap(18, 18, 18))
-        );
-        pnl4Layout.setVerticalGroup(
-            pnl4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl4Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(470, Short.MAX_VALUE))
-        );
+        rSPanelsSlider1.add(form_dispositivos, "card5");
 
-        rSPanelsSlider1.add(pnl4, "card5");
-
-        pnl5.setBackground(new java.awt.Color(255, 255, 255));
-        pnl5.setName("pnl5"); // NOI18N
-        pnl5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        pnl5.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 630, 19));
+        form_configuracion.setBackground(new java.awt.Color(255, 255, 255));
+        form_configuracion.setName("form_configuracion"); // NOI18N
+        form_configuracion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        form_configuracion.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 630, 19));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/configuracion.png"))); // NOI18N
-        pnl5.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 43, -1, 62));
+        form_configuracion.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 43, -1, 62));
 
-        rSPanelsSlider1.add(pnl5, "card6");
+        rSPanelsSlider1.add(form_configuracion, "card6");
 
-        pnl6.setBackground(new java.awt.Color(255, 255, 255));
-        pnl6.setName("pnl6"); // NOI18N
-        pnl6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        pnl6.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 630, 19));
+        form_prestamos.setBackground(new java.awt.Color(255, 255, 255));
+        form_prestamos.setName("form_prestamos"); // NOI18N
+        form_prestamos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        form_prestamos.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 630, 19));
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/prestamos1.png"))); // NOI18N
-        pnl6.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, 370, 50));
+        form_prestamos.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, 370, 50));
 
+        Regresar1.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 14)); // NOI18N
         Regresar1.setText("Regresar");
         Regresar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Regresar1ActionPerformed(evt);
             }
         });
-        pnl6.add(Regresar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 520, -1, -1));
+        form_prestamos.add(Regresar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 500, 120, 40));
+        form_prestamos.add(codigolibro_prestamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 144, -1));
 
-        rSPanelsSlider1.add(pnl6, "card6");
+        jLabel41.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel41.setText("Codigo Libro:");
+        form_prestamos.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, -1, -1));
 
-        pnl7.setBackground(new java.awt.Color(255, 255, 255));
-        pnl7.setName("pnl7"); // NOI18N
-        pnl7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        pnl7.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(167, 74, 630, 19));
+        jButton8.setText("...");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+        form_prestamos.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 30, -1));
+
+        jLabel45.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel45.setText("Tipo de Documento:");
+        form_prestamos.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, -1, -1));
+
+        jLabel47.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel47.setText("Numero de Documento:");
+        form_prestamos.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, -1, -1));
+
+        tipoId1_prestamo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tipoId1_prestamo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "TI", "CC", "CE", "" }));
+        form_prestamos.add(tipoId1_prestamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 210, 100, -1));
+        form_prestamos.add(numId1_prestamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, 144, -1));
+
+        jButton9.setText("jButton3");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+        form_prestamos.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 230, 30, -1));
+
+        resultadolibro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        resultadolibro.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        resultadolibro.setBorder(new javax.swing.border.MatteBorder(null));
+        form_prestamos.add(resultadolibro, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 510, 20));
+
+        resultadolibro1.setBackground(new java.awt.Color(255, 102, 153));
+        resultadolibro1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        resultadolibro1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        resultadolibro1.setBorder(new javax.swing.border.MatteBorder(null));
+        form_prestamos.add(resultadolibro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 510, 20));
+
+        resultadolibro2.setBackground(new java.awt.Color(255, 102, 153));
+        resultadolibro2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        resultadolibro2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        resultadolibro2.setBorder(new javax.swing.border.MatteBorder(null));
+        form_prestamos.add(resultadolibro2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 510, 20));
+
+        resultadolibro3.setBackground(new java.awt.Color(255, 102, 153));
+        resultadolibro3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        resultadolibro3.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        resultadolibro3.setBorder(new javax.swing.border.MatteBorder(null));
+        form_prestamos.add(resultadolibro3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 510, 20));
+
+        resultadolibro4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        resultadolibro4.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        resultadolibro4.setBorder(new javax.swing.border.MatteBorder(null));
+        form_prestamos.add(resultadolibro4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, 510, 20));
+
+        resultadolibro5.setBackground(new java.awt.Color(255, 102, 153));
+        resultadolibro5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        resultadolibro5.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        resultadolibro5.setBorder(new javax.swing.border.MatteBorder(null));
+        form_prestamos.add(resultadolibro5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, 510, 20));
+
+        resultadolibro6.setBackground(new java.awt.Color(255, 102, 153));
+        resultadolibro6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        resultadolibro6.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        resultadolibro6.setBorder(new javax.swing.border.MatteBorder(null));
+        form_prestamos.add(resultadolibro6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 510, 20));
+
+        resultadolibro7.setBackground(new java.awt.Color(255, 102, 153));
+        resultadolibro7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        resultadolibro7.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        resultadolibro7.setBorder(new javax.swing.border.MatteBorder(null));
+        form_prestamos.add(resultadolibro7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 320, 510, 20));
+
+        jLabel48.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel48.setText("Fecha Registro:");
+        form_prestamos.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 360, -1, -1));
+
+        fecha_prestamo.setEnabled(false);
+        form_prestamos.add(fecha_prestamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 360, 140, -1));
+
+        Guardar3.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 14)); // NOI18N
+        Guardar3.setText("Registrar");
+        Guardar3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Guardar3ActionPerformed(evt);
+            }
+        });
+        form_prestamos.add(Guardar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 500, 120, 40));
+
+        rSPanelsSlider1.add(form_prestamos, "card6");
+
+        form_estadisticas.setBackground(new java.awt.Color(255, 255, 255));
+        form_estadisticas.setName("form_estadisticas"); // NOI18N
+        form_estadisticas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        form_estadisticas.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(167, 74, 630, 19));
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/estadistica1.png"))); // NOI18N
-        pnl7.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, 400, 60));
+        form_estadisticas.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, 400, 60));
 
         Regrear3.setText("Regresar");
         Regrear3.addActionListener(new java.awt.event.ActionListener() {
@@ -1105,18 +1202,18 @@ public class Principal extends javax.swing.JFrame {
                 Regrear3ActionPerformed(evt);
             }
         });
-        pnl7.add(Regrear3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 530, -1, -1));
+        form_estadisticas.add(Regrear3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 530, -1, -1));
 
-        rSPanelsSlider1.add(pnl7, "card6");
+        rSPanelsSlider1.add(form_estadisticas, "card6");
 
-        pnl8.setBackground(new java.awt.Color(255, 255, 255));
-        pnl8.setName("pnl8"); // NOI18N
-        pnl8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        pnl8.add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 630, 19));
+        form_reportes.setBackground(new java.awt.Color(255, 255, 255));
+        form_reportes.setName("form_reportes"); // NOI18N
+        form_reportes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        form_reportes.add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 630, 19));
 
         jLabel26.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/reportes1.png"))); // NOI18N
-        pnl8.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, 370, 60));
+        form_reportes.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, 370, 60));
 
         Regresar2.setText("Regresar");
         Regresar2.addActionListener(new java.awt.event.ActionListener() {
@@ -1124,18 +1221,18 @@ public class Principal extends javax.swing.JFrame {
                 Regresar2ActionPerformed(evt);
             }
         });
-        pnl8.add(Regresar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 550, -1, -1));
+        form_reportes.add(Regresar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 550, -1, -1));
 
-        rSPanelsSlider1.add(pnl8, "card6");
+        rSPanelsSlider1.add(form_reportes, "card6");
 
-        pnl9.setBackground(new java.awt.Color(255, 255, 255));
-        pnl9.setName("pnl8"); // NOI18N
-        pnl9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        pnl9.add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 630, 19));
+        form_devolucion.setBackground(new java.awt.Color(255, 255, 255));
+        form_devolucion.setName("pnl8"); // NOI18N
+        form_devolucion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        form_devolucion.add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 630, 19));
 
         jLabel28.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/dev.png"))); // NOI18N
-        pnl9.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, 370, 60));
+        form_devolucion.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, 370, 60));
 
         Regresar3.setText("Regresar");
         Regresar3.addActionListener(new java.awt.event.ActionListener() {
@@ -1143,18 +1240,18 @@ public class Principal extends javax.swing.JFrame {
                 Regresar3ActionPerformed(evt);
             }
         });
-        pnl9.add(Regresar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 550, -1, -1));
+        form_devolucion.add(Regresar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 550, -1, -1));
 
-        rSPanelsSlider1.add(pnl9, "card6");
+        rSPanelsSlider1.add(form_devolucion, "card6");
 
-        autores.setBackground(new java.awt.Color(255, 255, 255));
-        autores.setName("pnl8"); // NOI18N
-        autores.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        autores.add(jSeparator12, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 630, 19));
+        form_autores.setBackground(new java.awt.Color(255, 255, 255));
+        form_autores.setName("pnl8"); // NOI18N
+        form_autores.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        form_autores.add(jSeparator12, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 630, 19));
 
         titulo_listaautores.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         titulo_listaautores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/listaautores.png"))); // NOI18N
-        autores.add(titulo_listaautores, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 570, 60));
+        form_autores.add(titulo_listaautores, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 570, 60));
 
         Regresar4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         Regresar4.setText("Enviar");
@@ -1163,14 +1260,14 @@ public class Principal extends javax.swing.JFrame {
                 Regresar4ActionPerformed(evt);
             }
         });
-        autores.add(Regresar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 420, -1, -1));
+        form_autores.add(Regresar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 420, -1, -1));
 
         jLabel42.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel42.setText("Buscar Nombre del Autor:");
-        autores.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 130, -1, -1));
+        form_autores.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 130, -1, -1));
 
         jTextField1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        autores.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 130, 250, -1));
+        form_autores.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 130, 250, -1));
 
         tabla_autores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1185,16 +1282,16 @@ public class Principal extends javax.swing.JFrame {
         ));
         jScrollPane4.setViewportView(tabla_autores);
 
-        autores.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 720, 200));
+        form_autores.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 720, 200));
 
         jLabel43.setText("Cantidad");
-        autores.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 410, 50, -1));
+        form_autores.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 410, 50, -1));
 
         cant_autores.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         cant_autores.setText("0");
-        autores.add(cant_autores, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 410, 70, -1));
+        form_autores.add(cant_autores, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 410, 70, -1));
 
-        rSPanelsSlider1.add(autores, "card6");
+        rSPanelsSlider1.add(form_autores, "card6");
 
         editorial.setBackground(new java.awt.Color(255, 255, 255));
         editorial.setName("pnl8"); // NOI18N
@@ -1330,7 +1427,7 @@ public class Principal extends javax.swing.JFrame {
             this.Dispositivos.setSelected(false);
             this.Configuracion.setSelected(false);
 
-            rSPanelsSlider1.setPanelSlider(20, pnl1, RSPanelsSlider.DIRECT.RIGHT);
+            rSPanelsSlider1.setPanelSlider(20, form_inicio, RSPanelsSlider.DIRECT.RIGHT);
 
             jPanel5.setBackground(new Color(153, 0, 255));
             jPanel6.setBackground(new Color(102, 0, 153));
@@ -1348,7 +1445,7 @@ public class Principal extends javax.swing.JFrame {
             this.LibrosyCatalogos.setSelected(false);
             this.Dispositivos.setSelected(false);
             this.Configuracion.setSelected(false);
-            rSPanelsSlider1.setPanelSlider(20, pnl2, RSPanelsSlider.DIRECT.RIGHT);
+            rSPanelsSlider1.setPanelSlider(20, form_registro, RSPanelsSlider.DIRECT.RIGHT);
 
             jPanel5.setBackground(new Color(102, 0, 153));
             jPanel6.setBackground(new Color(153, 0, 255));
@@ -1368,7 +1465,7 @@ public class Principal extends javax.swing.JFrame {
             this.LibrosyCatalogos.setSelected(true);
             this.Dispositivos.setSelected(false);
             this.Configuracion.setSelected(false);
-            rSPanelsSlider1.setPanelSlider(20, pnl3, RSPanelsSlider.DIRECT.RIGHT);
+            rSPanelsSlider1.setPanelSlider(20, form_librosycatalogos, RSPanelsSlider.DIRECT.RIGHT);
 
             jPanel5.setBackground(new Color(102, 0, 153));
             jPanel6.setBackground(new Color(102, 0, 153));
@@ -1389,7 +1486,7 @@ public class Principal extends javax.swing.JFrame {
             this.LibrosyCatalogos.setSelected(false);
             this.Dispositivos.setSelected(true);
             this.Configuracion.setSelected(false);
-            rSPanelsSlider1.setPanelSlider(20, pnl4, RSPanelsSlider.DIRECT.RIGHT);
+            rSPanelsSlider1.setPanelSlider(20, form_dispositivos, RSPanelsSlider.DIRECT.RIGHT);
 
             jPanel5.setBackground(new Color(102, 0, 153));
             jPanel6.setBackground(new Color(102, 0, 153));
@@ -1407,7 +1504,7 @@ public class Principal extends javax.swing.JFrame {
             this.LibrosyCatalogos.setSelected(false);
             this.Dispositivos.setSelected(false);
             this.Configuracion.setSelected(true);
-            rSPanelsSlider1.setPanelSlider(20, pnl5, RSPanelsSlider.DIRECT.RIGHT);
+            rSPanelsSlider1.setPanelSlider(20, form_configuracion, RSPanelsSlider.DIRECT.RIGHT);
 
             jPanel5.setBackground(new Color(102, 0, 153));
             jPanel6.setBackground(new Color(102, 0, 153));
@@ -1579,7 +1676,7 @@ public class Principal extends javax.swing.JFrame {
     private void jBReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBReporteActionPerformed
         if (!this.jBReporte.isSelected()) {
 
-            rSPanelsSlider1.setPanelSlider(20, pnl8, RSPanelsSlider.DIRECT.RIGHT);
+            rSPanelsSlider1.setPanelSlider(20, form_reportes, RSPanelsSlider.DIRECT.RIGHT);
 
         }
     }//GEN-LAST:event_jBReporteActionPerformed
@@ -1587,15 +1684,15 @@ public class Principal extends javax.swing.JFrame {
     private void jBPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPrestamoActionPerformed
         if (!this.jBPrestamo.isSelected()) {
 
-            rSPanelsSlider1.setPanelSlider(20, pnl6, RSPanelsSlider.DIRECT.RIGHT);
-
+            rSPanelsSlider1.setPanelSlider(20, form_prestamos, RSPanelsSlider.DIRECT.RIGHT);
+fecha_prestamo.setText(getFechaActual());
         }
     }//GEN-LAST:event_jBPrestamoActionPerformed
 
     private void jBEstadisticaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEstadisticaActionPerformed
         if (!this.jBEstadistica.isSelected()) {
 
-            rSPanelsSlider1.setPanelSlider(20, pnl7, RSPanelsSlider.DIRECT.RIGHT);
+            rSPanelsSlider1.setPanelSlider(20, form_estadisticas, RSPanelsSlider.DIRECT.RIGHT);
 
         }
     }//GEN-LAST:event_jBEstadisticaActionPerformed
@@ -1603,7 +1700,7 @@ public class Principal extends javax.swing.JFrame {
     private void Regresar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Regresar1ActionPerformed
         if (!this.Regresar1.isSelected()) {
 
-            rSPanelsSlider1.setPanelSlider(20, pnl1, RSPanelsSlider.DIRECT.RIGHT);
+            rSPanelsSlider1.setPanelSlider(20, form_inicio, RSPanelsSlider.DIRECT.RIGHT);
 
         }
     }//GEN-LAST:event_Regresar1ActionPerformed
@@ -1611,7 +1708,7 @@ public class Principal extends javax.swing.JFrame {
     private void Regresar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Regresar2ActionPerformed
         if (!this.Regresar2.isSelected()) {
 
-            rSPanelsSlider1.setPanelSlider(20, pnl1, RSPanelsSlider.DIRECT.RIGHT);
+            rSPanelsSlider1.setPanelSlider(20, form_inicio, RSPanelsSlider.DIRECT.RIGHT);
 
         }
     }//GEN-LAST:event_Regresar2ActionPerformed
@@ -1619,7 +1716,7 @@ public class Principal extends javax.swing.JFrame {
     private void Regrear3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Regrear3ActionPerformed
         if (!this.Regrear3.isSelected()) {
 
-            rSPanelsSlider1.setPanelSlider(20, pnl1, RSPanelsSlider.DIRECT.RIGHT);
+            rSPanelsSlider1.setPanelSlider(20, form_inicio, RSPanelsSlider.DIRECT.RIGHT);
 
         }
     }//GEN-LAST:event_Regrear3ActionPerformed
@@ -1646,7 +1743,7 @@ public class Principal extends javax.swing.JFrame {
     private void jBPrestamo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPrestamo1ActionPerformed
         if (!this.jBPrestamo.isSelected()) {
 
-            rSPanelsSlider1.setPanelSlider(20, pnl9, RSPanelsSlider.DIRECT.RIGHT);
+            rSPanelsSlider1.setPanelSlider(20, form_devolucion, RSPanelsSlider.DIRECT.RIGHT);
 
         }
     }//GEN-LAST:event_jBPrestamo1ActionPerformed
@@ -1654,7 +1751,7 @@ public class Principal extends javax.swing.JFrame {
     private void Regresar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Regresar3ActionPerformed
         if (!this.Regrear3.isSelected()) {
 
-            rSPanelsSlider1.setPanelSlider(20, pnl1, RSPanelsSlider.DIRECT.RIGHT);
+            rSPanelsSlider1.setPanelSlider(20, form_inicio, RSPanelsSlider.DIRECT.RIGHT);
 
         }
     }//GEN-LAST:event_Regresar3ActionPerformed
@@ -1829,7 +1926,7 @@ System.out.println(ps.toString());
     }//GEN-LAST:event_Guardar1ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        rSPanelsSlider1.setPanelSlider(20, autores, RSPanelsSlider.DIRECT.RIGHT);
+        rSPanelsSlider1.setPanelSlider(20, form_autores, RSPanelsSlider.DIRECT.RIGHT);
 
         mostrarautores();
     }//GEN-LAST:event_jButton6ActionPerformed
@@ -1841,7 +1938,7 @@ System.out.println(ps.toString());
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void Regresar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Regresar4ActionPerformed
-        rSPanelsSlider1.setPanelSlider(20, pnl3, RSPanelsSlider.DIRECT.RIGHT);
+        rSPanelsSlider1.setPanelSlider(20, form_librosycatalogos, RSPanelsSlider.DIRECT.RIGHT);
 
         DefaultTableModel tm = (DefaultTableModel) tabla_autores.getModel();
 
@@ -1851,7 +1948,7 @@ System.out.println(ps.toString());
     }//GEN-LAST:event_Regresar4ActionPerformed
 
     private void Regresar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Regresar5ActionPerformed
-        rSPanelsSlider1.setPanelSlider(20, pnl3, RSPanelsSlider.DIRECT.RIGHT);
+        rSPanelsSlider1.setPanelSlider(20, form_librosycatalogos, RSPanelsSlider.DIRECT.RIGHT);
         DefaultTableModel tm = (DefaultTableModel) tabla_editorial.getModel();
 
         String dato = String.valueOf(tm.getValueAt(tabla_editorial.getSelectedRow(), 0));
@@ -1916,9 +2013,14 @@ System.out.println(ps.toString());
         try{
         Connection con=getConection();
         JasperReport reporte=null;
+
         String path="src\\Reportes\\Usuarios.jasper";
+        
+        Map parametro=new HashMap();
+        parametro.put("gradoreporte","1A");
+        
         reporte=(JasperReport) JRLoader.loadObjectFromFile(path);
-        JasperPrint jprint= JasperFillManager.fillReport(reporte, null, con);
+        JasperPrint jprint= JasperFillManager.fillReport(reporte, parametro, con);
         
         JasperViewer vista=new JasperViewer(jprint, false);
         
@@ -1931,6 +2033,96 @@ System.out.println(ps.toString());
         
         
     }//GEN-LAST:event_ReportarPDFActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        try {
+            Connection con = null;
+            con = getConection();
+            PreparedStatement ps;
+            ResultSet res;
+            ps = con.prepareStatement("select * from librosycatalogos2 where codigo = ?");
+            ps.setString(1, codigolibro_prestamo.getText());
+
+            res = ps.executeQuery();
+
+            if (res.next()) {
+                resultadolibro.setText( "Libro:        " + res.getString("nombre"));
+                resultadolibro1.setText("Tomo:         " + res.getString("tomo"));
+                resultadolibro3.setText("Observacion:  " + res.getString("observacion"));
+                resultadolibro2.setText("Año:          " + res.getString("año"));
+
+                JOptionPane.showMessageDialog(null, "Libro Encontrado");
+            } else {
+                JOptionPane.showMessageDialog(null, "Libro No Encontrado");
+            }
+            con.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error en el proceso");
+        }
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+ try {
+            Connection con = null;
+            con = getConection();
+            PreparedStatement ps;
+            ResultSet res;
+            ps = con.prepareStatement("select * from usuario where doc = ? and tipodoc=?");
+            ps.setString(1, numId1_prestamo.getText());
+            ps.setString(2, tipoId1_prestamo.getSelectedItem().toString());
+            res = ps.executeQuery();
+
+            if (res.next()) {
+
+                //tipoId.setSelectedItem(res.getString("tipodoc"));
+                // numId.setText(res.getString("doc"));
+                resultadolibro4.setText(res.getString("nombres") + " "+ res.getString("apellidos"));
+                resultadolibro5.setText(res.getString("tipo_usuario"));
+                resultadolibro6.setText(res.getString("grado"));
+                resultadolibro7.setText(res.getString("ano"));
+                            
+
+                JOptionPane.showMessageDialog(null, "Usuario Encontrado");
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuario No Encontrado");
+            }
+            con.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error en el proceso");
+        }
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void Guardar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Guardar3ActionPerformed
+        try {
+           
+            Connection con;
+            con=getConection();
+            PreparedStatement ps;
+            
+            
+            ps = con.prepareStatement("insert into prestamo1(cod_libro,cod_empleado,id_usuario,fecha_prestamo) values (?,?,?,?)");
+            ps.setString(1, codigolibro_prestamo.getText());
+            ps.setInt(2, Conexion.idempl);
+            ps.setString(3, numId1_prestamo.getText());
+            ps.setString(4, fecha_prestamo.getText());
+            int res1;
+              System.out.println(1);
+                System.out.println(ps.toString());
+            res1 = ps.executeUpdate();
+              System.out.println(2);
+            if (res1 > 0) {
+                mostrar();
+                JOptionPane.showMessageDialog(null, "Informacion almacenada");
+            } else {
+                JOptionPane.showMessageDialog(null, "Informacion no pudo ser almacenada");
+            }
+            con.close();
+
+        } catch (HeadlessException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "error en el proceso");
+          
+        }
+    }//GEN-LAST:event_Guardar3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1978,6 +2170,7 @@ System.out.println(ps.toString());
     private javax.swing.JButton Guardar;
     private javax.swing.JButton Guardar1;
     private javax.swing.JButton Guardar2;
+    private javax.swing.JButton Guardar3;
     private javax.swing.JButton Inicio;
     private javax.swing.JButton LibrosyCatalogos;
     private javax.swing.JButton Limpiar;
@@ -2001,7 +2194,6 @@ System.out.println(ps.toString());
     private javax.swing.JComboBox<String> ano1;
     private javax.swing.JTextField apellidos;
     private javax.swing.JTextField area;
-    private javax.swing.JPanel autores;
     private javax.swing.JLabel cant_autores;
     private javax.swing.JLabel cant_editorial;
     private javax.swing.JLabel cant_libros;
@@ -2011,11 +2203,23 @@ System.out.println(ps.toString());
     private javax.swing.JTextField cod_editorial;
     private javax.swing.JTextField codi_editorial;
     private javax.swing.JTextField codigolibro;
+    private javax.swing.JTextField codigolibro_prestamo;
     private javax.swing.JPanel editorial;
     private javax.swing.JTextField email;
+    private javax.swing.JTextField fecha_prestamo;
     private javax.swing.JTextField fecha_registro;
     private javax.swing.JTextField fecha_registro1;
     private javax.swing.JTextField fecha_registro2;
+    private javax.swing.JPanel form_autores;
+    private javax.swing.JPanel form_configuracion;
+    private javax.swing.JPanel form_devolucion;
+    private javax.swing.JPanel form_dispositivos;
+    private javax.swing.JPanel form_estadisticas;
+    private javax.swing.JPanel form_inicio;
+    private javax.swing.JPanel form_librosycatalogos;
+    private javax.swing.JPanel form_prestamos;
+    private javax.swing.JPanel form_registro;
+    private javax.swing.JPanel form_reportes;
     private javax.swing.JComboBox<String> grado;
     private javax.swing.JButton jBEstadistica;
     private javax.swing.JButton jBPrestamo;
@@ -2028,6 +2232,8 @@ System.out.println(ps.toString());
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2063,10 +2269,14 @@ System.out.println(ps.toString());
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -2106,17 +2316,17 @@ System.out.println(ps.toString());
     private javax.swing.JTextField nombre_libro;
     private javax.swing.JTextField nombres;
     private javax.swing.JTextField numId;
+    private javax.swing.JTextField numId1_prestamo;
     private javax.swing.JTextArea observacion;
-    private javax.swing.JPanel pnl1;
-    private javax.swing.JPanel pnl2;
-    private javax.swing.JPanel pnl3;
-    private javax.swing.JPanel pnl4;
-    private javax.swing.JPanel pnl5;
-    private javax.swing.JPanel pnl6;
-    private javax.swing.JPanel pnl7;
-    private javax.swing.JPanel pnl8;
-    private javax.swing.JPanel pnl9;
     private rojerusan.RSPanelsSlider rSPanelsSlider1;
+    private javax.swing.JLabel resultadolibro;
+    private javax.swing.JLabel resultadolibro1;
+    private javax.swing.JLabel resultadolibro2;
+    private javax.swing.JLabel resultadolibro3;
+    private javax.swing.JLabel resultadolibro4;
+    private javax.swing.JLabel resultadolibro5;
+    private javax.swing.JLabel resultadolibro6;
+    private javax.swing.JLabel resultadolibro7;
     private javax.swing.JTextField rutaImagen;
     private javax.swing.JTextField rutaImagen1;
     private javax.swing.JComboBox<String> sexo;
@@ -2126,6 +2336,7 @@ System.out.println(ps.toString());
     private javax.swing.JTable tabla_editorial;
     private javax.swing.JTextField telefono;
     private javax.swing.JComboBox<String> tipoId;
+    private javax.swing.JComboBox<String> tipoId1_prestamo;
     private javax.swing.JComboBox<String> tipoUsuario;
     private javax.swing.JLabel titulo_listaautores;
     private javax.swing.JComboBox<String> tomo;

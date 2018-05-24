@@ -3,6 +3,9 @@
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="gradoreporte" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT
      usuario.`tipodoc` AS usuario_tipodoc,
@@ -13,14 +16,16 @@
      usuario.`ano` AS usuario_ano,
      usuario.`tipo_usuario` AS usuario_tipo_usuario
 FROM
-     `usuario` usuario]]>
+     `usuario` usuario
+WHERE usuario.grado=$P{gradoreporte}
+]]>
 	</queryString>
 	<field name="usuario_tipodoc" class="java.lang.String"/>
-	<field name="usuario_doc" class="java.lang.Double"/>
+	<field name="usuario_doc" class="java.lang.Integer"/>
 	<field name="usuario_nombres" class="java.lang.String"/>
 	<field name="usuario_apellidos" class="java.lang.String"/>
 	<field name="usuario_grado" class="java.lang.String"/>
-	<field name="usuario_ano" class="java.lang.Double"/>
+	<field name="usuario_ano" class="java.lang.Integer"/>
 	<field name="usuario_tipo_usuario" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>

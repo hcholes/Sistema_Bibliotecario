@@ -19,9 +19,8 @@ import javax.swing.JTextField;
  */
 public class Conexion extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Home9
-     */
+   
+   
     public Conexion() {
         initComponents();
         pnl_cubrir.setBackground(new Color(0,0,0,200));
@@ -168,8 +167,12 @@ public class Conexion extends javax.swing.JFrame {
 				char[] arrayC = txt_clave.getPassword(); 
                                 String contr = new String(arrayC); 
                               	while(res.next()) {
+                                    
+                                            
+                                                
 					if ((nombre.equals(res.getString("usuario"))) && (contr.equals(res.getString("clave")))){
-						//JOptionPane.showMessageDialog(null, "Bienvenido "+" "+res.getString("nombre")+" "+res.getString("apellido"));
+					idempl=res.getInt("id");
+                                     
 					this.dispose();
 					 Principal p=new Principal();
 					    p.setVisible(true);
@@ -225,6 +228,7 @@ public class Conexion extends javax.swing.JFrame {
     	public static final String URL="jdbc:mysql://127.0.0.1/biblioteca";
 	public static final String USERNAME="biblioteca";
 	public static final String PASSWORD="12345";
+        public static int idempl;
 	//private JTextField txt_nomusuario;
 	//private JTextField txt_clave;
 	
